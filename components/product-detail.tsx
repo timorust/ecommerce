@@ -24,19 +24,21 @@ export const ProductDetail = ({ product }: Props) => {
         </div>
       )}
 
-      <div>
-        <h1>{product.name}</h1>
-        {product.description && <p>{product.description}</p>}
+      <div className="md:w-1/2">
+        <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+        {product.description && (
+          <p className="text-gray-700 mb-4">{product.description}</p>
+        )}
 
         {price && price.unit_amount && (
-          <p className="text-xl text-white">
+          <p className="text-lg font-semibold text-gray-900">
             ${(price.unit_amount / 100).toFixed(2)}
           </p>
         )}
 
-        <div>
+        <div className="flex items-center space-x-4">
           <Button variant="outline"> -</Button>
-          <span> 0 </span>
+          <span className="text-lg font-semibold"> 0 </span>
           <Button variant="outline"> +</Button>
         </div>
       </div>
