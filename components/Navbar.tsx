@@ -1,13 +1,30 @@
 "use client";
 
 import { useCartStore } from "@/store/cart-store";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  ShoppingCartIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
   const { items } = useCartStore();
 
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
+
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setMobileOpen(false);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <nav className="sticky top-0 z-50 bg-blue-50 shadow">
@@ -33,6 +50,18 @@ export default function Navbar() {
               </span>
             )}
           </Link>
+
+          <Button
+            className="md:hidden"
+            variant="ghost"
+            onClick={() => setMobileOpen((prev) => !prev)}
+          >
+            {mobileOpen ? (
+              <XMarkIcon className="w-6 h-6" />
+            ) : (
+              <Bars3Icon className="w-6 h-6" />
+            )}
+          </Button>
         </div>
       </div>
     </nav>
