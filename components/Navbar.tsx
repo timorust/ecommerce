@@ -64,6 +64,28 @@ export default function Navbar() {
           </Button>
         </div>
       </div>
+
+      {mobileOpen && (
+        <nav className="md:hidden bg-white shadow-md">
+          <ul className="flex flex-col p-4 space-y-2">
+            <li>
+              <Link href="/" className="block hover:text-blue-600">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href="" className="block hover:text-blue-600">
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link href="" className="block hover:text-blue-600">
+                Checkout
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      )}
     </nav>
   );
 }
